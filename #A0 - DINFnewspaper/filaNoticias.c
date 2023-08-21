@@ -14,6 +14,7 @@ lista *criaLista() {
         return novaLista;
     } else
         printf("Erro ao alocar memória.\n");
+    return NULL;
 }
 
 /*insere uma nova noticia no fim da lista*/
@@ -49,32 +50,30 @@ void insereNoticia(lista *listaNoticias) {
 
 /*remove noticia do inicio da lista em questao e a atualiza*/
 void removeNoticia(lista *listaNoticias) {
-    nodo *nodoAux = malloc(sizeof(nodo));
+    nodo *nodoAux;
 
-    if (nodoAux) {
-        if (listaNoticias -> tamanho != 0) {
+    if (listaNoticias -> tamanho >= 1) {
             nodoAux = listaNoticias -> init -> prox;
             free(listaNoticias -> init);
             listaNoticias -> init = nodoAux;
             listaNoticias -> tamanho--;        
-        }
-    } else 
-        printf("Erro ao alocar memória.\n");
+    }
 }
 
 /*envelhece em um dia todas as noticias da lista*/
 void envelheceNoticias(lista *listaNoticias) {
     nodo *nodoAux = malloc(sizeof(nodo));
 
-    if (nodoAux) 
-        nodoAux = listaNoticias -> init;
-    else
+    if (nodoAux) {
+        if (listaNoticias -> tamanho > 0) {
+            nodoAux = listaNoticias -> init;
+            while (nodoAux != NULL) {
+            nodoAux -> idade++;
+            nodoAux = nodoAux -> prox; 
+            }
+        }
+    } else
         printf("Erro ao alocar memória.\n");
-
-    while (nodoAux != NULL) {
-        nodoAux -> idade++;
-        nodoAux = nodoAux -> prox;
-    }
 }
 
 /*verifica se, dentre as noticias da lista, ha alguma cuja 
