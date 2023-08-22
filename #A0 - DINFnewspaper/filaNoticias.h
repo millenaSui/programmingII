@@ -19,18 +19,18 @@ typedef struct filaNoticias {
 se falhar retorna mensagem de erro*/
 lista *criaLista();
 
-/*insere uma nova noticia no fim da lista*/
+/*insere uma nova notícia no fim da lista*/
 void insereNoticia(lista *listaNoticias);
 
-/*remove noticia do inicio da lista em questao e a atualiza*/
+/*remove notícia do início da lista em questão e a atualiza*/
 void removeNoticia(lista *listaNoticias);
 
 /*envelhece em um dia todas as noticias da lista*/
 void envelheceNoticias(lista *listaNoticias);
 
-/*verifica se, dentre as noticias da lista, ha alguma cuja 
-idade ultrapasse tres dias e, se sim, a remove*/
+/*verifica se, dentre as noticias da lista, há alguma cuja 
+idade ultrapasse três dias e, se sim, a remove*/
 void removeNoticiasVelhas(lista *listaNoticias);
 
-/*remove todos os elementos de uma lista e libera sua alocacao*/
+/*remove todos os elementos de uma lista e libera sua alocação*/
 lista *destroiLista(lista *listaNoticias);

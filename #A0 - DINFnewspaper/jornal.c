@@ -23,17 +23,24 @@ int defineOperacao() {
     printf("\nQual operação você deseja realizar?\n");
     printf("(1) Cadastrar notícia\n(2) Fechar edição\n(3) Sair\n");
     scanf("%d", &operacao);
+    while (operacao != 1 && operacao != 2 && operacao != 3) {
+        getc(stdin);
+        printf("\nVocê inseriu uma opção inválida, tente novamente.\n\n");
+        printf("\nQual operação você deseja realizar?\n");
+        printf("(1) Cadastrar notícia\n(2) Fechar edição\n(3) Sair\n");
+        scanf("%d", &operacao);
+    }
     return operacao;
 }
 
 int defineTipoNoticia() {
     int tipo = -1;
-    printf("\nA notícia a ser cadastrada é:\n(0) De alto interesse aos leitores\n(1) Informes gerais de menor interesse\n");
+        printf("\nA notícia a ser cadastrada deve ser classificada como:\n(0) Breaking News (de alto interesse aos leitores)\n(1) Informe (de menor interesse aos leitores)\n");
     scanf("%d", &tipo);
     while (tipo != 0 && tipo != 1) {
         getc(stdin);
         printf("\nVocê inseriu uma opção inválida, tente novamente.\n\n");
-        printf("\nA notícia a ser cadastrada é:\n(0) De alto interesse aos leitores\n(1) Informes gerais de menor interesse\n");
+        printf("\nA notícia a ser cadastrada deve ser classificada como:\n(0) Breaking News (de alto interesse aos leitores)\n(1) Informe (de menor interesse aos leitores)\n");
         scanf("%d", &tipo);
     }
     return tipo;
@@ -118,16 +125,17 @@ void imprimeNoticias(nodo *primeiraNoticia, nodo *segundaNoticia) {
     caso contrário, imprime com a segunda formatação*/
     if (segundaNoticia -> titulo != NULL) {
         printf("\n=======================================================\n");
-        printf("%s\n\n", primeiraNoticia -> titulo);
+        printf("%s\n", primeiraNoticia -> titulo);
         printf("%s", primeiraNoticia -> corpo);
-        printf("\n\n==\n\n");
-        printf("%s\n\n", segundaNoticia -> titulo);
+        printf("\n==\n\n");
+        printf("%s\n", segundaNoticia -> titulo);
         printf("%s", segundaNoticia -> corpo);
         printf("=======================================================\n\n");
     } else {
         printf("\n\n=======================================================\n");
-        printf("%s\n\n", primeiraNoticia -> titulo);
+        printf("%s\n", primeiraNoticia -> titulo);
         printf("%s", primeiraNoticia -> corpo);
+        printf("\n==\n\n\n\n\n");
         printf("=======================================================\n\n");
     }
 }
@@ -135,7 +143,6 @@ void imprimeNoticias(nodo *primeiraNoticia, nodo *segundaNoticia) {
 void fechaEdicao(lista *listaBreakingNews, lista *listaInformes) {
     nodo *primeiraNoticia = malloc(sizeof(nodo));
     nodo *segundaNoticia = malloc(sizeof(nodo));
-    nodo *nodoAux = malloc(sizeof(nodo));
 
     /*seleciona e imprime noticias válidas*/
     if (primeiraNoticia && segundaNoticia)
@@ -150,6 +157,8 @@ void fechaEdicao(lista *listaBreakingNews, lista *listaInformes) {
     envelheceNoticias(listaInformes);
     removeNoticiasVelhas(listaBreakingNews);
     removeNoticiasVelhas(listaInformes);
+    free(primeiraNoticia);
+    free(segundaNoticia);
 }
 
 

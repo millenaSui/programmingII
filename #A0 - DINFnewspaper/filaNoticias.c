@@ -17,12 +17,12 @@ lista *criaLista() {
     return NULL;
 }
 
-/*insere uma nova noticia no fim da lista*/
+/*insere uma nova notícia no fim da lista*/
 void insereNoticia(lista *listaNoticias) {
     nodo *noticia = malloc(sizeof(nodo));
 
-    /*se for possivel alocar memoria, inicializa 
-    o nodo, caso contrario, exibe erro*/
+    /*se for possível alocar memória, inicializa 
+    o nodo, caso contrário, exibe erro*/
     if(noticia) {
         getchar();
         printf("\nInsira o título da notícia:\n");
@@ -34,8 +34,8 @@ void insereNoticia(lista *listaNoticias) {
         noticia -> idade = 0;
         noticia -> prox = NULL;
 
-        /*se a fila estiver vazia insere nela a nova noticia,
-        caso contrário, insere a noticia no final da fila*/
+        /*se a fila estiver vazia, insere nela a nova notícia,
+        caso contrário, insere a notícia no final da fila*/
         if (listaNoticias -> tamanho == 0) {
             listaNoticias -> init = noticia;
             listaNoticias -> fim = noticia;
@@ -48,7 +48,7 @@ void insereNoticia(lista *listaNoticias) {
         printf("Erro ao alocar memória.\n");
 }
 
-/*remove noticia do inicio da lista em questao e a atualiza*/
+/*remove notícia do início da lista em questão e a atualiza*/
 void removeNoticia(lista *listaNoticias) {
     nodo *nodoAux;
 
@@ -62,30 +62,32 @@ void removeNoticia(lista *listaNoticias) {
 
 /*envelhece em um dia todas as noticias da lista*/
 void envelheceNoticias(lista *listaNoticias) {
-    nodo *nodoAux = malloc(sizeof(nodo));
+    nodo *nodoAux;
 
-    if (nodoAux) {
-        if (listaNoticias -> tamanho > 0) {
-            nodoAux = listaNoticias -> init;
-            while (nodoAux != NULL) {
+    if (listaNoticias -> tamanho > 0) {
+        nodoAux = listaNoticias -> init;
+        while (nodoAux != NULL) {
             nodoAux -> idade++;
             nodoAux = nodoAux -> prox; 
-            }
         }
-    } else
-        printf("Erro ao alocar memória.\n");
-}
-
-/*verifica se, dentre as noticias da lista, ha alguma cuja 
-idade ultrapasse tres dias e, se sim, a remove*/
-void removeNoticiasVelhas(lista *listaNoticias) {
-    if (listaNoticias -> tamanho != 0) {
-        while (listaNoticias -> init -> idade > 3)
-            removeNoticia(listaNoticias);
     }
 }
 
-/*remove todos os elementos de uma lista e libera sua alocacao*/
+/*verifica se, dentre as noticias da lista, há alguma cuja 
+idade ultrapasse três dias e, se sim, a remove*/
+void removeNoticiasVelhas(lista *listaNoticias) {
+    nodo *nodoAux;
+
+    if (listaNoticias -> tamanho > 0) {
+        nodoAux = listaNoticias -> init;
+        while (nodoAux != NULL && nodoAux -> idade > 3) {
+            removeNoticia(listaNoticias);
+            nodoAux = listaNoticias -> init;
+        }
+    }
+}
+
+/*remove todos os elementos de uma lista e libera sua alocação*/
 lista *destroiLista(lista *listaNoticias) {
     while (listaNoticias -> init != NULL) {
         removeNoticia(listaNoticias);
