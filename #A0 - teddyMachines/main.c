@@ -55,6 +55,7 @@ int main(int argc, char *argv[]){
         printf("==================================================================\n");
         if (!list) break;
     }
+    destroy_list(list); 
 
     return 0;
 }
